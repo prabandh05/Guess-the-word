@@ -27,4 +27,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Registration successful", response));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody com.guesstheword.dto.LoginRequest request) {
+        AuthResponse response = userService.login(request);
+        return ResponseEntity.ok(ApiResponse.success("Login successful", response));
+    }
 }
