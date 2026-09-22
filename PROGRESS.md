@@ -37,18 +37,18 @@
 ---
 
 ## Phase 2 (Day 2 - 23 Sep 2026): Core Game Engine
-- [ ] `POST /api/game/start` endpoint:
-  - [ ] Pick random word from `Word` repository
-  - [ ] Enforce max 3 games/day limit per user
-  - [ ] Create and persist `GameSession` (status IN_PROGRESS)
-- [ ] `POST /api/game/{sessionId}/guess` endpoint:
-  - [ ] Input validation (5-letter uppercase word)
-  - [ ] Enforce max 5 guesses per session
-  - [ ] Wordle-style letter evaluation (GREEN, ORANGE, GREY) with duplicate letter handling
-  - [ ] Win condition check & congratulatory message
-  - [ ] Exhausted guesses check & "better luck next time" message
-- [ ] `GET /api/game/{sessionId}` session state endpoint (returns guesses in chronological order)
-- [ ] Unit & edge-case tests for game engine
+- [x] `POST /api/game/start` endpoint:
+  - [x] Pick random word from `Word` repository
+  - [x] Enforce max 3 games/day limit per user
+  - [x] Create and persist `GameSession` (status IN_PROGRESS)
+- [x] `POST /api/game/{sessionId}/guess` endpoint:
+  - [x] Input validation (5-letter uppercase word)
+  - [x] Enforce max 5 guesses per session
+  - [x] Wordle-style letter evaluation (GREEN, ORANGE, GREY) with duplicate letter handling
+  - [x] Win condition check & congratulatory message
+  - [x] Exhausted guesses check & "better luck next time" message
+- [x] `GET /api/game/{sessionId}` session state endpoint (returns guesses in chronological order)
+- [x] Unit & edge-case tests for game engine
 
 ---
 
