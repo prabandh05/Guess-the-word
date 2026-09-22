@@ -135,7 +135,7 @@ H2 Database Web Console is available at `http://localhost:8080/h2-console` (JDBC
 ## Project Roadmap
 
 - [x] **Phase 1 (Day 1):** Project Setup, Data Model & Authentication (JWT + Spring Security)
-- [ ] **Phase 2 (Day 2):** Core Game Engine & Wordle Comparison Logic
+- [x] **Phase 2 (Day 2):** Core Game Engine & Wordle Comparison Logic
 - [ ] **Phase 3 (Day 3):** Persistence Completeness & Admin Aggregate Reports
 - [ ] **Phase 4 (Day 4):** Frontend UI (5x5 interactive board + Admin dashboard)
 - [ ] **Phase 5 (Day 5):** Hardening, Regression Testing, Docs & Final Delivery
