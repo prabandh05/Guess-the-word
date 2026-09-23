@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/", "/*.html", "/css/**", "/js/**", "/favicon.ico").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")

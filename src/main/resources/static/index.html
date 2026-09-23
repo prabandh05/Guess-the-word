@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess The Word — Sign In</title>
+  <meta name="description" content="Sign in or create an account to play Guess The Word, a Wordle-style word guessing game." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="toast-container"></div>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <!-- Logo -->
+      <div class="auth-logo">
+        <h1>GUESS THE <span>WORD</span></h1>
+        <p>A Wordle-style word guessing challenge</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-target="login">Sign In</button>
+        <button class="auth-tab"        data-target="register">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form active">
+        <div class="form-group">
+          <label class="form-label" for="login-username">Username</label>
+          <input id="login-username" name="username" type="text"
+                 placeholder="Enter your username" autocomplete="username" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input id="login-password" name="password" type="password"
+                 placeholder="Enter your password" autocomplete="current-password" required />
+        </div>
+        <p id="login-error" class="form-error"></p>
+        <button id="login-btn" class="btn btn-primary btn-lg" type="submit">Sign In</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="reg-username">Username</label>
+          <input id="reg-username" name="username" type="text"
+                 placeholder="e.g. PlayerOne" autocomplete="username" required />
+          <p id="uname-hint" class="form-hint">
+            Min 5 letters, must contain both uppercase &amp; lowercase letters.
+          </p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password</label>
+          <input id="reg-password" name="password" type="password"
+                 placeholder="e.g. Secret123$" autocomplete="new-password" required />
+          <p id="pass-hint" class="form-hint">
+            Min 5 chars with letters, numbers, and one of: $&nbsp;%&nbsp;*&nbsp;&amp;
+          </p>
+        </div>
+        <p id="register-error" class="form-error"></p>
+        <button id="register-btn" class="btn btn-primary btn-lg" type="submit">Create Account</button>
+      </form>
+    </div>
+  </main>
+
+  <style>
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+  </style>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

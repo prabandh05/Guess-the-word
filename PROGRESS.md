@@ -65,16 +65,16 @@
 ---
 
 ## Phase 4 (Day 4 - 25 Sep 2026): Frontend / UI
-- [ ] Player UI:
-  - [ ] Registration and login forms wired to JWT auth APIs
-  - [ ] 5x5 interactive Game Board with uppercase letter inputs
-  - [ ] Color-coded tiles (Green / Orange / Grey)
-  - [ ] Congratulations and "Better luck next time" modals with OK buttons
-  - [ ] 3-game daily limit banner and disabling
-- [ ] Admin UI:
-  - [ ] Daily report view with date picker
-  - [ ] User-specific activity and performance report table
-- [ ] Responsive styling and user feedback
+- [x] Player UI:
+  - [x] Registration and login forms wired to JWT auth APIs
+  - [x] 5x5 interactive Game Board with uppercase letter inputs
+  - [x] Color-coded tiles (Green / Orange / Grey)
+  - [x] Congratulations and "Better luck next time" modals with OK buttons
+  - [x] 3-game daily limit banner and disabling
+- [x] Admin UI:
+  - [x] Daily report view with date picker
+  - [x] User-specific activity and performance report table
+- [x] Responsive styling and user feedback
 
 ---
 

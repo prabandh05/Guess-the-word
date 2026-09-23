@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess The Word — Play</title>
+  <meta name="description" content="Play Guess The Word — guess the hidden 5-letter word in up to 5 attempts." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <span class="navbar-brand">GUESS THE <span>WORD</span></span>
+    <div class="navbar-actions">
+      <span id="player-name" style="color:var(--text-muted);font-size:0.875rem;"></span>
+      <button id="logout-btn" class="btn btn-secondary" style="padding:0.45rem 1rem;font-size:0.8rem;">
+        Sign Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Daily limit banner ───────────────────────────────────── -->
+  <div id="limit-banner" class="limit-banner" style="max-width:500px;margin:1rem auto 0;">
+    <span class="icon">🚫</span>
+    <span>You've played <strong>3 games</strong> today — daily limit reached. Come back tomorrow!</span>
+  </div>
+
+  <!-- ── Main game area ──────────────────────────────────────── -->
+  <main class="game-page">
+
+    <!-- Controls -->
+    <div class="session-controls">
+      <button id="new-game-btn" class="btn btn-primary">
+        New Game
+      </button>
+    </div>
+
+    <!-- 5×5 Board -->
+    <div id="board" role="grid" aria-label="Guess board"></div>
+
+    <!-- On-screen keyboard -->
+    <div id="keyboard" role="group" aria-label="On-screen keyboard"></div>
+
+  </main>
+
+  <!-- ── Win Modal ────────────────────────────────────────────── -->
+  <div id="win-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="win-title">
+    <div class="modal">
+      <div class="modal-icon">🎉</div>
+      <h2 id="win-title">Congratulations!</h2>
+      <p id="win-attempts">You guessed the word!</p>
+      <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="closeModal('win-modal');startNewGame();">
+          Play Again
+        </button>
+        <button class="btn btn-secondary" onclick="closeModal('win-modal')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Loss Modal ───────────────────────────────────────────── -->
+  <div id="loss-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-icon">😔</div>
+      <h2>Better luck next time!</h2>
+      <p>You've used all your guesses. Keep practicing!</p>
+      <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="closeModal('loss-modal');startNewGame();">
+          Try Again
+        </button>
+        <button class="btn btn-secondary" onclick="closeModal('loss-modal')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/game.js"></script>
+</body>
+</html>

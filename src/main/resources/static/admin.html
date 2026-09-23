@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess The Word — Admin Dashboard</title>
+  <meta name="description" content="Admin dashboard for Guess The Word — view daily game statistics and per-user activity reports." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <span class="navbar-brand">GUESS THE <span>WORD</span> <span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;">Admin</span></span>
+    <div class="navbar-actions">
+      <span id="admin-name" style="color:var(--text-muted);font-size:0.875rem;"></span>
+      <button id="logout-btn" class="btn btn-secondary" style="padding:0.45rem 1rem;font-size:0.8rem;">
+        Sign Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Main content ─────────────────────────────────────────── -->
+  <main class="admin-page">
+
+    <h2>Reports <span>Dashboard</span></h2>
+
+    <div class="report-grid">
+
+      <!-- Daily Report Card -->
+      <div class="report-card">
+        <h3><span class="card-icon">📅</span> Daily Report</h3>
+
+        <div class="input-row">
+          <input id="report-date" type="date" aria-label="Select date" />
+          <button id="daily-report-btn" class="btn btn-primary" style="white-space:nowrap;min-width:120px;">
+            Load Report
+          </button>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="stat-users">—</div>
+            <div class="stat-label">Players Played</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-correct">—</div>
+            <div class="stat-label">Correct Guesses</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Report Card -->
+      <div class="report-card">
+        <h3><span class="card-icon">👤</span> User Activity Report</h3>
+
+        <div class="input-row">
+          <input id="user-id-input" type="number" min="1" placeholder="Enter User ID…" aria-label="User ID" />
+          <button id="user-report-btn" class="btn btn-primary" style="white-space:nowrap;min-width:120px;">
+            Load Report
+          </button>
+        </div>
+
+        <div id="user-report-results">
+          <div class="empty-state">
+            <div class="es-icon">🔍</div>
+            <p>Enter a user ID to view their activity.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.report-grid -->
+
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
