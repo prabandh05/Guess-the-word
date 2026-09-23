@@ -53,14 +53,14 @@
 ---
 
 ## Phase 3 (Day 3 - 24 Sep 2026): Persistence Completeness & Admin Reports
-- [ ] Ensure all sessions and guesses with timestamps are indexed and stored
-- [ ] `GET /api/admin/reports/daily?date=YYYY-MM-DD`:
-  - [ ] Number of distinct users who played on date
-  - [ ] Number of correct guesses (sessions WON) on date
-- [ ] `GET /api/admin/reports/user/{userId}`:
-  - [ ] Per date: number of words tried and number of correct guesses
-- [ ] Repository aggregate queries and DTOs
-- [ ] Integration tests for admin reports
+- [x] Ensure all sessions and guesses with timestamps are indexed and stored
+- [x] `GET /api/admin/reports/daily?date=YYYY-MM-DD`:
+  - [x] Number of distinct users who played on date
+  - [x] Number of correct guesses (sessions WON) on date
+- [x] `GET /api/admin/reports/user/{userId}`:
+  - [x] Per date: number of words tried and number of correct guesses
+- [x] Repository aggregate queries and DTOs
+- [x] Integration tests for admin reports
 
 ---
 
