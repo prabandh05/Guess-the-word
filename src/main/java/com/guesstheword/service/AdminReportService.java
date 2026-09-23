@@ -3,6 +3,7 @@ package com.guesstheword.service;
 import com.guesstheword.dto.DailyReportResponse;
 import com.guesstheword.dto.UserDailyStatDto;
 import com.guesstheword.dto.UserReportResponse;
+import com.guesstheword.dto.UserSummaryDto;
 import com.guesstheword.entity.GameSession;
 import com.guesstheword.entity.GameStatus;
 import com.guesstheword.entity.User;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,17 @@ public class AdminReportService {
 
     private final GameSessionRepository gameSessionRepository;
     private final UserRepository userRepository;
+
+    @Transactional(readOnly = true)
+    public List<UserSummaryDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> UserSummaryDto.builder()
+                        .id(user.getId())
+                        .username(user.getUsername())
+                        .role(user.getRole().name())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
     /**
      * Daily report: number of distinct players who played on the given date,

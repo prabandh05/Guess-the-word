@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('daily-report-btn').addEventListener('click', loadDailyReport);
   document.getElementById('user-report-btn').addEventListener('click', loadUserReport);
 
-  // Load today's daily report automatically on open
+  // Load today's daily report and user list automatically on open
   loadDailyReport();
+  loadUsersList();
 });
 
 // ── Daily Report ────────────────────────────────────────────────
@@ -133,3 +134,56 @@ function animateCount(el, from, to) {
   }
   requestAnimationFrame(step);
 }
+
+// ── Users List ──────────────────────────────────────────────────
+async function loadUsersList() {
+  const results = document.getElementById('users-list-results');
+  
+  try {
+    const res = await authFetch('/admin/users');
+    const data = await res.json();
+    
+    if (!res.ok || !data.success) throw new Error(data.message || 'Failed to load users.');
+    
+    const users = data.data;
+    if (!users || users.length === 0) {
+      results.innerHTML = `<div class="empty-state"><p>No users found.</p></div>`;
+      return;
+    }
+    
+    let html = `
+      <table class="report-table" style="cursor: pointer;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    users.forEach(u => {
+      html += `
+        <tr onclick="selectUserForReport(${u.id})">
+          <td>${u.id}</td>
+          <td><strong>${u.username}</strong></td>
+          <td><span class="badge ${u.role === 'ADMIN' ? 'badge-orange' : 'badge-green'}">${u.role}</span></td>
+        </tr>
+      `;
+    });
+    
+    html += `</tbody></table>`;
+    results.innerHTML = html;
+  } catch (err) {
+    results.innerHTML = `<div class="empty-state"><p>${err.message}</p></div>`;
+  }
+}
+
+window.selectUserForReport = function(userId) {
+  document.getElementById('user-id-input').value = userId;
+  loadUserReport();
+  // Scroll up to the report
+  document.getElementById('user-report-btn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+

@@ -3,6 +3,7 @@ package com.guesstheword.controller;
 import com.guesstheword.dto.ApiResponse;
 import com.guesstheword.dto.DailyReportResponse;
 import com.guesstheword.dto.UserReportResponse;
+import com.guesstheword.dto.UserSummaryDto;
 import com.guesstheword.service.AdminReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -23,6 +25,15 @@ import java.time.LocalDate;
 public class AdminController {
 
     private final AdminReportService adminReportService;
+
+    @GetMapping("/users")
+    public ResponseEntity<ApiResponse<List<UserSummaryDto>>> getAllUsers() {
+        return ResponseEntity.ok(ApiResponse.<List<UserSummaryDto>>builder()
+                .success(true)
+                .message("Users retrieved successfully")
+                .data(adminReportService.getAllUsers())
+                .build());
+    }
 
     /**
      * GET /api/admin/reports/daily?date=YYYY-MM-DD
