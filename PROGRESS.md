@@ -79,8 +79,8 @@
 ---
 
 ## Phase 5 (Day 5 - 26 Sep 2026): Testing, Hardening & Submission
-- [ ] End-to-end regression testing against all project requirements
-- [ ] Global exception handling polish
-- [ ] Documentation and deployment guide
-- [ ] Tag final release `v1.0`
-- [ ] Prepare training submission email and GitHub repository link
+- [x] End-to-end regression testing against all project requirements
+- [x] Global exception handling polish
+- [x] Documentation and deployment guide
+- [x] Tag final release `v1.0`
+- [x] Prepare training submission email and GitHub repository link

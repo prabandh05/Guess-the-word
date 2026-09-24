@@ -1,6 +1,6 @@
 # Guess the Word — Spring Boot Web Application
 
-A full-stack, enterprise-grade Wordle-style word guessing game built with Spring Boot, Spring Security (JWT), Spring Data JPA, and H2/MySQL.
+A full-stack, enterprise-grade Wordle-style word guessing game built with Spring Boot, Spring Security (JWT), Spring Data JPA, and vanilla HTML/JS on the frontend.
 
 Developed as part of the technical training project with daily phased milestones and clean version control.
 
@@ -16,7 +16,7 @@ Developed as part of the technical training project with daily phased milestones
    - **Password**: Must be at least 5 characters long and contain alphabetic characters, numeric digits, and at least one special character from (`$`, `%`, `*`, `&`).
 3. **Database Pre-seeding**:
    - 20 uppercase 5-letter English words loaded automatically upon boot.
-   - Default administrator account pre-configured.
+   - Default administrator account and a default player account pre-configured.
 
 ---
 
@@ -28,6 +28,7 @@ Developed as part of the technical training project with daily phased milestones
 - **Database**: H2 In-Memory/File Database (with full PostgreSQL/MySQL compatibility)
 - **ORM**: Spring Data JPA / Hibernate
 - **Build Tool**: Maven 3.9+ (with bundled `./mvnw` wrapper)
+- **Frontend**: Vanilla HTML5, CSS3, JavaScript (no external frameworks, served directly via Spring Boot)
 - **Testing**: JUnit 5, AssertJ, Spring Boot Test, MockMvc
 
 ---
@@ -54,7 +55,8 @@ cd "Guess the word"
 ```
 
 The application starts on `http://localhost:8080`.  
-H2 Database Web Console is available at `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:guesstheword`, User: `sa`, Password: empty).
+- **Frontend UI**: `http://localhost:8080/index.html`
+- **H2 Database Web Console**: `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:guesstheword`, User: `sa`, Password: empty).
 
 ---
 
@@ -62,80 +64,33 @@ H2 Database Web Console is available at `http://localhost:8080/h2-console` (JDBC
 
 | Role | Username | Password | Access |
 |---|---|---|---|
-| **ADMIN** | `AdminUser` | `Admin123*` | Admin Reports, Game Ping, Admin Ping |
-| **PLAYER** | `PlayerOne` | `Player123$` | Game Play, Game Ping |
+| **ADMIN** | `AdminUser` | `Admin123*` | Admin Reports Dashboard |
+| **PLAYER** | `PlayerOne` | `Player123$` | Game Play |
 
 ---
 
-## API Documentation (Phase 1)
+## Complete API Documentation
 
-### 1. Register a New User
-- **Endpoint:** `POST /api/auth/register`
-- **Headers:** `Content-Type: application/json`
-- **Body:**
-```json
-{
-  "username": "PlayerTwo",
-  "password": "PlayerPass123$",
-  "role": "PLAYER"
-}
-```
-- **Response (201 Created):**
-```json
-{
-  "success": true,
-  "message": "Registration successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiJ9...",
-    "tokenType": "Bearer",
-    "id": 3,
-    "username": "PlayerTwo",
-    "role": "PLAYER",
-    "message": "User registered successfully"
-  }
-}
-```
+### 1. Authentication Endpoints
+- `POST /api/auth/register` — Register a new user (Requires `username`, `password`, `role`).
+- `POST /api/auth/login` — Login and receive JWT token.
 
-### 2. Login
-- **Endpoint:** `POST /api/auth/login`
-- **Headers:** `Content-Type: application/json`
-- **Body:**
-```json
-{
-  "username": "PlayerOne",
-  "password": "Player123$"
-}
-```
-- **Response (200 OK):**
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiJ9...",
-    "tokenType": "Bearer",
-    "id": 2,
-    "username": "PlayerOne",
-    "role": "PLAYER",
-    "message": "Login successful"
-  }
-}
-```
+### 2. Game Endpoints (Requires `PLAYER` role)
+- `POST /api/game/start` — Start a new game session. (Enforces 3 games/day limit).
+- `POST /api/game/{sessionId}/guess` — Submit a 5-letter uppercase guess. Returns evaluation (G, O, X).
+- `GET /api/game/{sessionId}` — Retrieve current game state and guess history.
 
-### 3. Role-Protected Health Endpoints
-- **Player Ping:** `GET /api/game/ping`
-  - Header: `Authorization: Bearer <TOKEN>`
-  - Accessible by: `PLAYER` and `ADMIN`
-- **Admin Ping:** `GET /api/admin/ping`
-  - Header: `Authorization: Bearer <TOKEN>`
-  - Accessible by: `ADMIN` only (returns 403 for `PLAYER`)
+### 3. Admin Endpoints (Requires `ADMIN` role)
+- `GET /api/admin/reports/daily?date=YYYY-MM-DD` — Get total players and correct guesses for a date.
+- `GET /api/admin/users` — Get a list of all registered users.
+- `GET /api/admin/reports/user/{userId}` — Get per-date activity breakdown for a specific user.
 
 ---
 
-## Project Roadmap
+## Project Roadmap (Completed)
 
-- [x] **Phase 1 (Day 1):** Project Setup, Data Model & Authentication (JWT + Spring Security)
-- [x] **Phase 2 (Day 2):** Core Game Engine & Wordle Comparison Logic
-- [ ] **Phase 3 (Day 3):** Persistence Completeness & Admin Aggregate Reports
-- [ ] **Phase 4 (Day 4):** Frontend UI (5x5 interactive board + Admin dashboard)
-- [ ] **Phase 5 (Day 5):** Hardening, Regression Testing, Docs & Final Delivery
+- [x] **Phase 1:** Project Setup, Data Model & Authentication (JWT + Spring Security)
+- [x] **Phase 2:** Core Game Engine & Wordle Comparison Logic
+- [x] **Phase 3:** Persistence Completeness & Admin Aggregate Reports
+- [x] **Phase 4:** Frontend UI (5x5 interactive board + Admin dashboard)
+- [x] **Phase 5:** Hardening, Regression Testing, Docs & Final Delivery
